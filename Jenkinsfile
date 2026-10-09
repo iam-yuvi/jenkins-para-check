@@ -20,5 +20,18 @@ pipeline {
                 echo "Selected branch: ${params.branchName}"
             }
         }
+        
+        stage('Print') {
+            steps {
+                script {
+                    def currentBranch = sh(
+                        script: 'git branch --show-current',
+                        returnStdout: true
+                    ).trim()
+        
+                    echo "Actual branch checked out: ${currentBranch}"
+                }
+            }
+        }
     }
 }
